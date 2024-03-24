@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_003506) do
   end
 
   create_table "segments", force: :cascade do |t|
-    t.string "type", null: false
+    t.string "s_type", null: false
     t.string "format"
     t.string "base_value", null: false
     t.string "value"

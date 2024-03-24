@@ -1,7 +1,7 @@
 class CreateSegments < ActiveRecord::Migration[7.1]
   def change
     create_table :segments do |t|
-      t.string :type, null: false
+      t.string :s_type, null: false
       t.string :format
       t.string :base_value, null: false
       t.string :value
