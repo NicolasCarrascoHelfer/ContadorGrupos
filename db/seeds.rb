@@ -12,7 +12,10 @@ puts "Seeding database"
 
 testgroup = Group.create(name: "Numeration test")
 
-Segment.create(s_type: "FECHA", format: "YYYYMMDD", base_value: "20240324", value: "20240324", behavior: "SISTEMA", reset: "NUNCA", order: 1, group: testgroup)
+fecha = Segment.create(s_type: "FECHA", format: "YYYYMMDD", base_value: ".", value: ".", behavior: "SISTEMA", reset: "NUNCA", order: 1, group: testgroup)
+
+fecha.update(base_value: fecha.created_at.strftime("%Y%m%d"), value: fecha.created_at.strftime("%Y%m%d"))
+
 Segment.create(s_type: "ALFANUMERICO", format: nil, base_value: "AAA", value: "AAA", behavior: "CORRELATIVO", reset: "DIA", order: 2, group: testgroup)
 
 puts "Database seeded"
