@@ -11,5 +11,5 @@
   <%= button_to "Resetear", reset_path(@group), method: :put %>
   <br>
   <%= link_to "Volver al menú", root_path %>
-  <%= @group.segments.first.created_at.strftime("%Y%m%d") %>
+  <%= Time.now.strftime("%y%m%d") %>
 </div>
