@@ -38,8 +38,50 @@ class Group < ApplicationRecord
           end
         end
 
-        if segment.value != today
+        changed = ""
+
+        for i in 0..(today.size - 1)
+          if segment.value[i] != today[i]
+            case segment.format[i]
+            when "D"
+              if changed != "M" && changed != "Y"
+                changed = "D"
+              end
+            when "M"
+              if changed != "Y"
+                changed = "M"
+              end
+            when "Y"
+              changed = "Y"
+            end
+          end
+        end
+
+        if changed != ""
           segment.update(value: today)
+          case changed
+          when "D"
+            self.segments.order(order: :asc).each do |seg|
+              if seg.reset == "DIA"
+                seg.reset_value
+                add = false
+              end
+            end
+          when "M"
+            self.segments.order(order: :asc).each do |seg|
+              if seg.reset == "MES" || seg.reset == "DIA"
+                seg.reset_value
+                add = false
+              end
+            end
+          when "Y"
+            self.segments.order(order: :asc).each do |seg|
+              if seg.reset == "AÑO" || seg.reset == "MES" || seg.reset == "DIA"
+                seg.reset_value
+                add = false
+              end
+            end
+          end
         end
       end
 

@@ -1,6 +1,4 @@
 class PagesController < ApplicationController
-  before_action :update_time
-
   def home
   end
 
@@ -10,11 +8,5 @@ class PagesController < ApplicationController
     @group.segments.order(order: :desc).each do |segment|
       @groupvalue.concat(segment.value)
     end
-  end
-
-  private
-
-  def update_time
-    
   end
 end
