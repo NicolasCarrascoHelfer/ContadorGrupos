@@ -1,5 +1,11 @@
 <div class="container">
-  <h1>Contador</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
-  <%=  link_to "Contador test", count_path %>
+  <br>
+  <h1>Contadores</h1>
+  <% Group.all.each do |group| %>
+    <hr>
+    <%= "#{group.name}: #{group.value}" %>
+    <br>
+    <%=  link_to "Ver contador" , group %>
+    <br>
+  <% end %>
 </div>

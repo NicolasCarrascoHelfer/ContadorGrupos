@@ -1,12 +1,9 @@
 class PagesController < ApplicationController
   def home
+    @group = Group.all
   end
 
   def count
-    @group = Group.first
-    @groupvalue = ""
-    @group.segments.order(order: :desc).each do |segment|
-      @groupvalue.concat(segment.value)
-    end
+    @group = Group.find(params[:id])
   end
 end

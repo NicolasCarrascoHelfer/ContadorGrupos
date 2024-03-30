@@ -107,4 +107,12 @@ class Group < ApplicationRecord
       end
     end
   end
+
+  def value
+    groupval = ""
+    self.segments.order(order: :desc).each do |segment|
+      groupval.concat(segment.value)
+    end
+    return groupval
+  end
 end

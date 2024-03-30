@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   #get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  get "count", to: "pages#count"
+  get "count/:id", to: "pages#count", as: "group"
   put "groups/:id/next", to: "groups#next", as: "next"
   put "groups/:id/reset", to: "groups#reset", as: "reset"
   root "pages#home"

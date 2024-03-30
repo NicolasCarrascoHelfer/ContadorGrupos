@@ -3,7 +3,7 @@
   <h3><%= "Valor del contador #{@group.name}"%></h3>
   <br>
   <h5>
-    <%= @groupvalue %>
+    <%= @group.value %>
   </h5>
   <br>
   <%= button_to "Siguiente", next_path(@group), method: :put %>
