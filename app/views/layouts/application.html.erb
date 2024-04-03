@@ -10,6 +10,9 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <header>
+      <%= render 'layouts/alerts' %>
+    </header>
     <main>
       <%= yield %>
     </main>

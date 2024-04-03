@@ -12,10 +12,17 @@ puts "Seeding database"
 
 testgroup = Group.create(name: "Numeration test")
 
-fecha = Segment.create(s_type: "FECHA", format: "YYYYMMDD", base_value: ".", value: ".", behavior: "SISTEMA", reset: "NUNCA", order: 1, group: testgroup)
+Segment.create(category: "date", format: "Ymd", base_value: Time.now.strftime("%Y-%m-%d"), value: Time.now.strftime("%Y-%m-%d"), behavior: "system", reset: "never", position: 2, group: testgroup)
 
-fecha.update(base_value: fecha.created_at.strftime("%Y%m%d"), value: fecha.created_at.strftime("%Y%m%d"))
-
-Segment.create(s_type: "ALFANUMERICO", format: nil, base_value: "AAA", value: "AAA", behavior: "CORRELATIVO", reset: "DIA", order: 2, group: testgroup)
+Segment.create(category: "alpha", base_value: "AAA", value: "AAA", behavior: "correlative", reset: "day", position: 1, group: testgroup)
 
 puts "Database seeded"
+
+
+#Group.create(name: "Test 2")
+
+#Segment.create(category: "alpha", base_value: "1A", value: "1A", behavior: "correlative", reset: "month", position: 1, group_id: 2)
+
+#Segment.create(category: "date", format: "mYd", base_value: Time.now.strftime("%Y-%m-%d"), value: Time.now.strftime("%Y-%m-%d"), behavior: "system", reset: "never", position: 2, group_id: 2)
+
+#Segment.create(category: "alpha", base_value: "22", value: "22", behavior: "correlative", reset: "day", position: 3, group_id: 2)

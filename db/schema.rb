@@ -22,13 +22,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_003506) do
   end
 
   create_table "segments", force: :cascade do |t|
-    t.string "s_type", null: false
+    t.integer "category", null: false
     t.string "format"
     t.string "base_value", null: false
     t.string "value"
-    t.string "behavior"
-    t.string "reset"
-    t.integer "order", default: 1, null: false
+    t.integer "behavior"
+    t.integer "reset"
+    t.integer "position", default: 1, null: false
     t.bigint "group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
