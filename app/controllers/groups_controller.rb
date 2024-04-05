@@ -38,13 +38,6 @@ class GroupsController < ApplicationController
     redirect_to @group
   end
 
-  def reset
-    @group.segments.order(position: :desc).each do |segment|
-      segment.reset_value
-    end
-    redirect_to @group
-  end
-
   private
 
   def set_group
