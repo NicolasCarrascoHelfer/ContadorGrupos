@@ -69,3 +69,5 @@ end
 gem "bullet", "~> 7.1"
 
 gem "simple_command"
+
+gem "rspec-rails", "~> 6.1.0"
