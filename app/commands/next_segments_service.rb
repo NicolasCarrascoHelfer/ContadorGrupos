@@ -11,7 +11,7 @@ class NextSegmentsService
       next_value = @segment.value.next
       updated = @segment.updated_at.in_time_zone("America/Lima").to_date
       if updated != @now && !(@segment.never?)
-        if (@now.year != updated.year && @segment.year?) || (@now.month != updated.month && @segment.month?) || (@now.day != updated.day && @segment.day?)
+        if (@now.year != updated.year && (@segment.year? || @segment.month? || @segment.day?)) || (@now.month != updated.month && (@segment.month? || @segment.day?)) || (@now.day != updated.day && @segment.day?)
           return "reset"
         else
           return next_value

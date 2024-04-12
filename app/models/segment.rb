@@ -2,7 +2,7 @@ class Segment < ApplicationRecord
   belongs_to :group, counter_cache: true
 
   enum category: [:alpha, :date]
-  enum behavior: [:system, :correlative]
+  enum behavior: [:system, :correlative, :constant]
   enum reset: [:day, :month, :year, :never]
 
   def reset_value
