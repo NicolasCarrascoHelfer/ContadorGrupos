@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "bullet", "~> 7.1"
+
+gem "simple_command"
