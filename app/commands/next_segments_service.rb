@@ -12,20 +12,19 @@ class NextSegmentsService
       updated = @segment.updated_at.in_time_zone("America/Lima").to_date
       if updated != @now && !(@segment.never?)
         if (@now.year != updated.year && (@segment.year? || @segment.month? || @segment.day?)) || (@now.month != updated.month && (@segment.month? || @segment.day?)) || (@now.day != updated.day && @segment.day?)
-          return "reset"
+          errors.add(:base, "reset")
         else
           return next_value
         end
       elsif next_value.size <= @segment.base_value.size
         return next_value
       else
-        errors.add(:base, :failure)
+        errors.add(:base, "rollback")
       end
-    end
-
-    if @segment.date? && @segment.system? && @now != @segment.value.to_date
+    elsif @segment.date? && @segment.system? && @now != @segment.value.to_date
       return @now.strftime("%Y-%m-%d")
+    else
+      errors.add(:base, "unchanged")
     end
-
   end
 end

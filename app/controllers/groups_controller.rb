@@ -7,16 +7,23 @@ class GroupsController < ApplicationController
     now = Time.now.to_date
     @group.segments.order(position: :asc).each do |segment|
       previous_value.push(segment.value)
-      command = NextSegmentsService.call(segment, now)
+      next_segment = NextSegmentsService.call(segment, now)
 
-      if command.success?
-        if command.result == "reset"
-          segment.reset_value
-        elsif command.result
-          segment.update(value: command.result)
+      if next_segment.success?
+        if next_segment.result
+          segment.update(value: next_segment.result)
         end
       else
-        rollback = true
+        case next_segment.errors.first[1]
+        when "reset"
+          segment.reset_value
+        when "rollback"
+          rollback = true
+        when "unchanged"
+          nil
+        else
+          flash[:alert] = next_segment.errors.first[1]
+        end
       end
     end
 
