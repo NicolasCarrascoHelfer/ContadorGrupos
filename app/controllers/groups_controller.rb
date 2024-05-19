@@ -5,34 +5,28 @@ class GroupsController < ApplicationController
     previous_value = []
     rollback = false
     now = Time.now.to_date
-    @group.segments.order(position: :asc).each do |segment|
-      previous_value.push(segment.value)
-      next_segment = NextSegmentsService.call(segment, now)
 
-      if next_segment.success?
-        if next_segment.result
-          segment.update(value: next_segment.result)
-        end
-      else
-        case next_segment.errors.first[1]
-        when "reset"
-          segment.reset_value
-        when "rollback"
-          rollback = true
-        when "unchanged"
-          nil
-        else
-          flash[:alert] = next_segment.errors.first[1]
-        end
-      end
-    end
-
-    if rollback
-      flash[:alert] = "Error: Se alcanzó el límite del contador"
-      count = 0
+    ActiveRecord::Base.transaction do
       @group.segments.order(position: :asc).each do |segment|
-        segment.update(value: previous_value[count])
-        count = count + 1
+        next_segment = NextSegmentsService.call(segment, now)
+  
+        if next_segment.success?
+          if next_segment.result
+            segment.update(value: next_segment.result)
+          end
+        else
+          case next_segment.errors.first[1]
+          when "reset"
+            segment.reset_value
+          when "rollback"
+            flash[:alert] = "Error: Se alcanzó el límite del contador"
+            raise ActiveRecord::Rollback
+          when "unchanged"
+            nil
+          else
+            flash[:alert] = next_segment.errors.first[1]
+          end
+        end
       end
     end
     redirect_to @group
