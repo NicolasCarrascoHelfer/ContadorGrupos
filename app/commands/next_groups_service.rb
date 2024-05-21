@@ -29,6 +29,7 @@ class NextGroupsService
           end
         end
       end
+      return @group.value
     end
   end
 end
