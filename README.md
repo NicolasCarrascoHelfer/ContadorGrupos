@@ -14,7 +14,7 @@ This program lets you set a custom counter that can be configured to increase th
 
 ### Instalation
 
-After creating the database and migrating it, run the program by executing:
+After configuring the PostgreSQL credentials in config/database.yml, creating the database and migrating it, run the program by executing:
 
 ```
 $ rails s
@@ -22,23 +22,35 @@ $ rails s
 
 Search in your browser [http://localhost:3000](http://localhost:3000) to access the list of counters.
 
-### Create a counter
+### Increasing a counter
+
+```
+NextGroupsService.call(@group,@time)
+```
+
+### Getting a Group value
+
+```
+@group.value
+```
+
+## Create a counter
 
 The counter is a group of independent segments with a stablished value and behavior when the counter increase its value.
 
-#### Group
+### Group
 
 First, create an object of the "Group" class considering the attributes:
 
-##### name (string)
+#### name (string)
 
 Counter's name
 
-#### Segment
+### Segment
 
 Then you have to create an object of the "Segment" class considering the attributes:
 
-##### category (string)
+#### category (string)
 
 There are two types of segments:
 
@@ -57,15 +69,15 @@ The value that the segment will display in the counter.
 
 The segment value will change to this value when the time determined by the reset attribute has passed.
 
-##### behavior (string)
+#### behavior (string)
 
-Determines what the segment does when the next_group() function is called
+Determines what the segment does when the counter increases.
 
 * system: (date exclusive) The segment displays system's date when the counter increases
 * correlative: (alpha exclusive) An unit is added to the segment value when the counter increases
 * constant: The segment value remains constant
 
-##### reset (string)
+#### reset (string)
 
 Determines after how many time the segment will return to its base value.
 
@@ -81,4 +93,3 @@ The position where the segment value is displayed in the counter, from left to r
 #### group_id
 
 The id of the group to which the segment belongs.
-
