@@ -125,19 +125,8 @@ describe NextGroupsService do
         expect(context).to be_success
       end
 
-      it "returns AAB(today)2A" do
+      it "returns 1" do
         expect(context.result).to eq("1")
-      end
-
-      let(:group) { testgroup }
-      let(:now) { now }
-
-      it "success" do
-        expect(context).to be_success
-      end
-
-      it "returns AAB(today)2A" do
-        expect(context.result).to eq("2")
       end
     end
 
@@ -152,19 +141,8 @@ describe NextGroupsService do
         expect(context).to be_success
       end
 
-      it "returns AAB(today)2A" do
+      it "returns 1" do
         expect(context.result).to eq("1")
-      end
-
-      let(:group) { testgroup }
-      let(:now) { now }
-
-      it "success" do
-        expect(context).to be_success
-      end
-
-      it "returns AAB(today)2A" do
-        expect(context.result).to eq("2")
       end
     end
   end

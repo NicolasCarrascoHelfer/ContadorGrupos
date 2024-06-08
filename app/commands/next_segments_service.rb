@@ -9,7 +9,7 @@ class NextSegmentsService
   def call
     if @segment.alpha? && @segment.correlative?
       next_value = @segment.value.next
-      updated = @segment.updated_at.in_time_zone("America/Lima").to_date
+      updated = @segment.date.in_time_zone("America/Lima").to_date
       if updated != @now && !(@segment.never?)
         if (@now.year != updated.year && (@segment.year? || @segment.month? || @segment.day?)) || (@now.month != updated.month && (@segment.month? || @segment.day?)) || (@now.day != updated.day && @segment.day?)
           errors.add(:base, "reset")

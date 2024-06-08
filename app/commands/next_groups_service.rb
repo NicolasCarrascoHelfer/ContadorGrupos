@@ -13,18 +13,20 @@ class NextGroupsService
 
         if next_segment.success?
           if next_segment.result
-            segment.update(value: next_segment.result)
+            segment.update(value: next_segment.result, date: @now.strftime("%Y-%m-%d"))
           end
         else
           case next_segment.errors.first[1]
           when "reset"
             segment.reset_value
+            segment.update(date: @now.strftime("%Y-%m-%d"))
           when "rollback"
             errors.add(:base, "Error: Se alcanzó el límite del contador")
             raise ActiveRecord::Rollback
           when "unchanged"
-            nil
+            segment.update(date: @now.strftime("%Y-%m-%d"))
           else
+            segment.update(date: @now.strftime("%Y-%m-%d"))
             errors.add(:base, next_segment.errors.first[1])
           end
         end

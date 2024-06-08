@@ -189,6 +189,21 @@ describe NextSegmentsService do
       end
     end
 
+    context "Next to 1 after 1 day with reset day" do
+      segment = Segment.create(category: "alpha", base_value: "1", value: "1", behavior: "correlative", reset: "day", position: 1, group: group)
+      now = Time.now.next_day.to_date
+      let(:segment) { segment }
+      let(:now) { now }
+
+      it "failure" do
+        expect(context).to be_failure
+      end
+
+      it "error reset" do
+        expect(context.errors.first[1]).to eq("reset")
+      end
+    end
+
     
 
   end

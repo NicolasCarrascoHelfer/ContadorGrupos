@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_003506) do
     t.integer "reset"
     t.integer "position", default: 1, null: false
     t.bigint "group_id", null: false
+    t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_segments_on_group_id"

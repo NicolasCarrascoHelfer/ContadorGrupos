@@ -9,6 +9,7 @@ class CreateSegments < ActiveRecord::Migration[7.1]
       t.integer :reset
       t.integer :position, null: false, default: 1
       t.belongs_to :group, null: false, foreign_key: true
+      t.date :date
 
       t.timestamps
     end
