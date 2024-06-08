@@ -113,5 +113,59 @@ describe NextGroupsService do
         expect(context.result).to eq("21AA12")
       end
     end
+
+    context "Next to 1" do
+      testgroup = Group.create(name: "Testgroup")
+      Segment.create(category: "alpha", base_value: "1", value: "1", behavior: "correlative", reset: "day", position: 1, group: testgroup)
+      now = Time.now.next_day.to_date
+      let(:group) { testgroup }
+      let(:now) { now }
+
+      it "success" do
+        expect(context).to be_success
+      end
+
+      it "returns AAB(today)2A" do
+        expect(context.result).to eq("1")
+      end
+
+      let(:group) { testgroup }
+      let(:now) { now }
+
+      it "success" do
+        expect(context).to be_success
+      end
+
+      it "returns AAB(today)2A" do
+        expect(context.result).to eq("2")
+      end
+    end
+
+    context "Next to 2" do
+      testgroup = Group.create(name: "Testgroup")
+      Segment.create(category: "alpha", base_value: "1", value: "2", behavior: "correlative", reset: "day", position: 1, group: testgroup)
+      now = Time.now.next_day.to_date
+      let(:group) { testgroup }
+      let(:now) { now }
+
+      it "success" do
+        expect(context).to be_success
+      end
+
+      it "returns AAB(today)2A" do
+        expect(context.result).to eq("1")
+      end
+
+      let(:group) { testgroup }
+      let(:now) { now }
+
+      it "success" do
+        expect(context).to be_success
+      end
+
+      it "returns AAB(today)2A" do
+        expect(context.result).to eq("2")
+      end
+    end
   end
 end
