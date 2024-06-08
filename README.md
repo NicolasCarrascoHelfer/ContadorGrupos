@@ -2,7 +2,7 @@
 
 ## About
 
-This program lets you set a custom counter that can be configured to increase the values flowing a predefined logic.
+This program lets you set a custom counter that can be configured to increase the values following a predefined logic.
 
 ## Getting started
 
